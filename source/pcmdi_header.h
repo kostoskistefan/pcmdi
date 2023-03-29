@@ -7,7 +7,7 @@ extern "C" {
 
 #include <stdint.h>
 
-#define PCMDI_HEADER_AMOUNT_OF_BITS 16
+#define PCMDI_HEADER_DEFAULT_VALUE 0x0000
 
 enum PCMDIInternalRegisterDescriptor
 {

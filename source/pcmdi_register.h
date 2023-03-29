@@ -7,11 +7,13 @@ extern "C" {
 
 #include <stdint.h>
 
+#define PCMDI_REGISTER_BANK_MAXIMUM_SIZE 32
+
 struct PCMDIRegister
 {
     uint8_t index_descriptor;
     uint16_t size;
-    uint8_t *data;
+    void *data_pointer;
 };
 
 struct PCMDIRegisterBank
@@ -20,11 +22,8 @@ struct PCMDIRegisterBank
     struct PCMDIRegister *registers;
 };
 
-extern void pcmdi_register_create(struct PCMDIRegister *pcmdi_register, uint8_t index_descriptor, uint16_t size, uint8_t *data);
-extern void pcmdi_register_bank_create(struct PCMDIRegisterBank *bank);
-
+extern struct PCMDIRegister *pcmdi_register_bank_find_register(struct PCMDIRegisterBank *bank, uint8_t index_descriptor);
 extern void pcmdi_register_bank_get_register_value(struct PCMDIRegisterBank *bank, uint8_t index_descriptor, void *out_value);
-extern void pcmdi_register_bank_insert_registers(struct PCMDIRegisterBank *bank, struct PCMDIRegister *reg, uint8_t number_of_registers);
 
 #ifdef __cplusplus
 }
